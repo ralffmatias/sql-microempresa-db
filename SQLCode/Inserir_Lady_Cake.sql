@@ -1,6 +1,7 @@
 
 USE ladycake
 GO
+
 INSERT INTO medidas  VALUES ('1Kg', '13cm X 10cm', 10, 50);
 INSERT INTO medidas  VALUES ('1,5Kg', '15cm X 10cm', 15, 75);
 INSERT INTO medidas  VALUES ('2Kg', '20cm X 10cm', 20, 100);
