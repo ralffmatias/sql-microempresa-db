@@ -28,8 +28,7 @@ CREATE PROCEDURE pc_deletar_pedido
 		@lucro_total		float			= NULL,
 		@lucro_bruto		float			= NULL,
 		@id_clientes		int			= NULL,
-		@mes			varchar(20)		= NULL,
-		@max			int			= 0
+		@mes			varchar(20)		= NULL
 
 /*Busca o id_pedido caso ele seja = null*/
 	IF isnull(@id_pedidos, 0) = 0
