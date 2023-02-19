@@ -1,7 +1,7 @@
 ## Data Base LadyCake
 <p align="center">
 <br/>
-<img src="https://raw.githubusercontent.com/ralffmatias/projeto-LadyCake/master/folder/LadyCake.jpg" alt="LadyCake logo!" width="500" height="250" >
+<img src="https://raw.githubusercontent.com/ralffmatias/LadyCake_Project/master/folder/LadyCake.jpg" alt="LadyCake logo!" width="500" height="250" >
 
 ### DataBase development for a micro company for the sale and production of confectionery cakes</h1>
  These are the SQL Server codes for the development of a DataBase for a micro company, Which sells and produces cakes for birthdays and events.  The DataBase must respect business rules and meet the company's data control needs.  The final project presents the creation of the DataBase, the insertion of product information, the creation of indexes, a dynamic view and two storie procedures to insert and delete sales and also the presentation of some SQL Tuning techniques
