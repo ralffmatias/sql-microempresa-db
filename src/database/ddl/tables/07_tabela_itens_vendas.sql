@@ -9,7 +9,7 @@ BEGIN
 	CREATE TABLE dbo.tabela_itens_vendas
 		(
 			id_itens_venda		int identity(1,1),
-			id_pedido			int not null,
+			id_venda			int not null,
 			dt_entrega			smalldatetime not null,
 			id_medida			int not null,
 			id_recheio			tinyint,
@@ -26,8 +26,8 @@ BEGIN
 			CONSTRAINT pk_tabela_itens_vendas$id_itens_venda 
 			PRIMARY KEY (id_itens_venda),
 
-			CONSTRAINT fk_tabela_itens_vendas_X_tabela_pedidos$id_pedido		
-			FOREIGN KEY (id_pedido)	REFERENCES dbo.tabela_pedidos(id_pedido),
+			CONSTRAINT fk_tabela_itens_vendas_X_tabela_vendas$id_venda		
+			FOREIGN KEY (id_venda)	REFERENCES dbo.tabela_vendas(id_venda),
 
 			CONSTRAINT fk_tabela_itens_vendas_X_tabela_medidas$_id_medida		
 			FOREIGN KEY (id_medida)	REFERENCES dbo.tabela_medidas(id_medida),
@@ -39,8 +39,8 @@ BEGIN
 			FOREIGN KEY (id_massa) REFERENCES dbo.tabela_massas(id_massa)
 		) ON dados
 
-	CREATE  nonclustered INDEX Indx_tabela_itens_vendas$id_pedido		
-	ON dbo.tabela_itens_vendas(id_pedido) WITH(FILLFACTOR= 80) ON indices
+	CREATE  nonclustered INDEX Indx_tabela_itens_vendas$id_venda		
+	ON dbo.tabela_itens_vendas(id_venda) WITH(FILLFACTOR= 80) ON indices
 
 	CREATE  nonclustered INDEX Indx_tabela_itens_vendas$_dt_entrega		
 	ON dbo.tabela_itens_vendas(dt_entrega) WITH(FILLFACTOR= 80) ON indices
