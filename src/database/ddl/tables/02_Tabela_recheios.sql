@@ -10,7 +10,7 @@ BEGIN
 		(
 			id_recheio		tinyint identity(1,1),
 			nm_recheio		varchar(50) not null,
-			dv_especial		tinyint,
+			dv_especial		bit,
 			vl_especial		numeric(19,2),
 			CONSTRAINT		pk_tabela_recheios$id_recheio 
 			PRIMARY KEY		(id_recheio)
