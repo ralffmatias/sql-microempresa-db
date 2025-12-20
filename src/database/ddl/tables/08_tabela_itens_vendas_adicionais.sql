@@ -1,4 +1,4 @@
-USE ladycake;
+USE ladycake
 GO
 
 --------------------------------------------------------------------------------
@@ -9,8 +9,8 @@ BEGIN
 	CREATE TABLE dbo.tabela_itens_vendas_adicionais
 		(
 			id_itens_vendas_adicional	int identity(1,1),
-			id_itens_venda				int identity(1,1),
-			id_adicional				int identity(1,1),
+			id_itens_venda				int,
+			id_adicional				int,
 
 			CONSTRAINT pk_tabela_itens_vendas_adicionais$id_itens_vendas_adicional
 			PRIMARY KEY (id_itens_vendas_adicional),
