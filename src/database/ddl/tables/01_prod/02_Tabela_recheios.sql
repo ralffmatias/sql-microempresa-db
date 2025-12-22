@@ -10,12 +10,10 @@ BEGIN
 		(
 			id_recheio		tinyint identity(1,1),
 			nm_recheio		varchar(50) not null,
-			dv_especial		bit,
-			vl_especial		numeric(19,2),
+			dv_especial		bit default 0,
+			vl_especial		numeric(19,2) default 0.00,
+			dv_ativo		bit default 1,
 			CONSTRAINT		pk_tabela_recheios$id_recheio 
 			PRIMARY KEY		(id_recheio)
 		) ON dados
-
-	CREATE  nonclustered INDEX Idx_tabela_recheios$id_recheio		
-	ON dbo.tabela_recheios(id_recheio) WITH(FILLFACTOR= 80) ON indices
 END

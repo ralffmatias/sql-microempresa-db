@@ -13,6 +13,7 @@ BEGIN
 			nm_tamanho_forma	varchar(12) not null,
 			nr_fatias_100g		tinyint not null,
 			vl_preco			numeric(19,2) not null,
+			dv_ativo			bit default 1,
 			CONSTRAINT			pk_tabela_medidas$id_medida
 			PRIMARY KEY			(id_medida)
 		) ON dados
