@@ -71,18 +71,6 @@ VALUES
 GO
 
 --------------------------------------------------------
--- tabela_pessoas
---------------------------------------------------------
-INSERT INTO cad.tabela_pessoas
-    (nm_pessoa, nm_cpf_cnpj, nm_endereco, nm_ddd, nm_celular)
-VALUES
-    ('pessoa 1', NULL, NULL, '61', '999999991'),
-    ('pessoa 2', NULL, NULL, '61', '999999992'),
-    ('pessoa 3', NULL, NULL, '61', '999999993'),
-    ('pessoa 4', NULL, NULL, '61', '999999994')
-GO
-
---------------------------------------------------------
 -- tabela_adicionais
 --------------------------------------------------------
 INSERT INTO dbo.tabela_adicionais
@@ -167,3 +155,48 @@ FROM	(
 JOIN	dbo.tabela_grp_status g
 ON		g.nm_grp_descricao = s.nm_grp_descricao
 GO
+
+INSERT INTO cad.tabela_tipo_contatos
+(
+    cd_tipo_contato,
+    nm_tipo_contato,
+    dv_ativo,
+    dt_inclusao,
+    dt_alteracao
+)
+VALUES
+    ('EMA', 'E-mail',           1, GETDATE(), NULL),
+    ('CEL', 'Celular',          1, GETDATE(), NULL),
+    ('TEL', 'Telefone fixo',    1, GETDATE(), NULL),
+    ('WPP', 'WhatsApp',         1, GETDATE(), NULL);
+GO
+
+INSERT INTO cad.tabela_tipo_enderecos
+(
+    cd_tipo_endereco,
+    nm_tipo_endereco,
+    dv_ativo,
+    dt_inclusao,
+    dt_alteracao
+)
+VALUES
+    ('RES', 'Residencial', 1, GETDATE(), NULL),
+    ('COM', 'Comercial',   1, GETDATE(), NULL),
+    ('ENT', 'Entrega',     1, GETDATE(), NULL),
+    ('COB', 'Cobrança',    1, GETDATE(), NULL);
+GO
+
+INSERT INTO cad.tabela_papeis
+(
+    cd_papel,
+    nm_papel,
+    dv_ativo,
+    dt_inclusao,
+    dt_alteracao
+)
+VALUES
+    ('C', 'Cliente',             1, GETDATE(), NULL),
+    ('F', 'Fornecedor',          1, GETDATE(), NULL),
+    ('U', 'Usuário do sistema',  1, GETDATE(), NULL),
+    ('A', 'Administrador',       1, GETDATE(), NULL),
+    ('E', 'Funcionário',         1, GETDATE(), NULL);

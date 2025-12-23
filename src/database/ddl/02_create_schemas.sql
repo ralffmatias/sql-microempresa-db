@@ -38,6 +38,20 @@ END
 GO
 
 -------------------------------------------------------------------------------
+-- Schema: prod
+-- Obs: normalmente já existe, mas deixamos explícito
+-------------------------------------------------------------------------------
+IF NOT EXISTS (
+    SELECT 1 
+    FROM sys.schemas 
+    WHERE name = 'prod'
+)
+BEGIN
+    EXEC ('CREATE SCHEMA prod AUTHORIZATION dbo');
+END
+GO
+
+-------------------------------------------------------------------------------
 -- Schema: dbo
 -- Obs: normalmente já existe, mas deixamos explícito
 -------------------------------------------------------------------------------
@@ -49,4 +63,3 @@ IF NOT EXISTS (
 BEGIN
     EXEC ('CREATE SCHEMA dbo AUTHORIZATION dbo');
 END
-GO

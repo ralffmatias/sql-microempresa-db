@@ -2,18 +2,19 @@ USE ladycake
 GO
 
 --------------------------------------------------------------------------------
--- 03_tabela_massas
+-- 06_tabela_papeis
 --------------------------------------------------------------------------------
-IF object_id(N'prod.tabela_massas', N'U') is null
+IF object_id(N'cad.tabela_papeis', N'U') is null
 BEGIN
-	CREATE TABLE prod.tabela_massas
+	CREATE TABLE cad.tabela_papeis
 		(
-			id_massa		tinyint identity(1,1),
-			nm_massa		varchar(20) unique not null,
+			id_papel		smallint identity(1,1),
+			cd_papel		char(1) unique not null,
+			nm_papel		varchar(20) not null,
 			dv_ativo		bit not null default 1,
 			dt_inclusao		datetime not null default getdate(),
 			dt_alteracao	datetime,
-			CONSTRAINT	pk_tabela_massas$id_massa 
-			PRIMARY KEY (id_massa)
+			CONSTRAINT pk_tabela_papeis$id_papel
+			PRIMARY KEY (id_papel)
 		) ON dados
 END
