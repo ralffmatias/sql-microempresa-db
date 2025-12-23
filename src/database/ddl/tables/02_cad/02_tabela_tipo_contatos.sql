@@ -24,4 +24,12 @@ BEGIN
 			CONSTRAINT CK_tabela_tipo_contatos$cd_tipo_contato
 			CHECK (cd_tipo_contato LIKE '[A-Z][A-Z][A-Z]')
 		) ON dados
+
+	-- Tipos de contato
+	INSERT INTO cad.tabela_tipo_contatos (cd_tipo_contato, nm_tipo_contato, dv_ativo, dt_inclusao)
+	VALUES
+		('MAI', 'E-mail', 1, GETDATE()),
+		('CEL', 'Celular', 1, GETDATE()),
+		('TEL', 'Telefone fixo', 1, GETDATE()),
+		('WTP', 'WhatsApp', 1, GETDATE())
 END

@@ -8,7 +8,7 @@ IF object_id(N'prod.tabela_medidas', N'U') is null
 BEGIN
 	CREATE TABLE prod.tabela_medidas
 		(
-			id_medida			int identity(1, 1),
+			id_medida			tinyint identity(1, 1),
 			nm_peso				varchar(10) unique not null,
 			nm_tamanho_forma	varchar(12) unique not null,
 			nr_fatias_100g		tinyint,

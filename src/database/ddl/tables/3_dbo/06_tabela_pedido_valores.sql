@@ -9,14 +9,14 @@ BEGIN
 	CREATE TABLE dbo.tabela_pedido_valores
 		(
 			id_pedido_valor		int identity(1, 1),
-			id_pedido			int not null,
+			id_pedido			int unique not null,
 			vl_itens			numeric(19,2) not null,
 			vl_adicionais		numeric(19,2) not null,
-			vl_descontos		numeric(19,2) default 0.00,
+			vl_descontos		numeric(19,2) not null default 0.00,
 			vl_custo_estimado	numeric(19,2),
 			vl_total			numeric(19, 2) not null,
-			id_status			int not null,
-			dt_calculo			datetime default getdate(),
+			id_status			smallint not null,
+			dt_calculo			datetime not null default getdate(),
 
 			CONSTRAINT pk_tabela_pedido_valores$id_pedido_valor
 			PRIMARY KEY (id_pedido_valor),
@@ -25,7 +25,23 @@ BEGIN
 			FOREIGN KEY (id_pedido) REFERENCES dbo.tabela_pedidos(id_pedido),
 
 			CONSTRAINT fk_tabela_pedido_valores_X_tabela_status$id_status
-			FOREIGN KEY (id_status) REFERENCES dbo.tabela_status(id_status)
+			FOREIGN KEY (id_status) REFERENCES dbo.tabela_status(id_status),
+			
+			CONSTRAINT CK_tabela_pedido_valores$vl_itens 
+			CHECK (vl_itens >= 0),
+
+			CONSTRAINT CK_tabela_pedido_valores$vl_adicionais 
+			CHECK (vl_adicionais >= 0),
+
+			CONSTRAINT CK_tabela_pedido_valores$vl_descontos 
+			CHECK (vl_descontos >= 0),
+
+			CONSTRAINT CK_tabela_pedido_valores$vl_total 
+			CHECK (vl_total >= 0),
+
+			CONSTRAINT CK_tabela_pedido_valores$vl_custo_estimado 
+			CHECK (vl_custo_estimado IS NULL OR vl_custo_estimado >= 0)
+
 		) ON dados
 
 	IF NOT EXISTS (SELECT TOP 1 1 FROM sys.indexes WHERE name = 'Indx_tabela_pedido_valores$id_pedido')

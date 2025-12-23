@@ -14,7 +14,20 @@ BEGIN
 			dv_ativo		bit not null default 1,
 			dt_inclusao		datetime not null default getdate(),
 			dt_alteracao	datetime,
+
 			CONSTRAINT pk_tabela_papeis$id_papel
-			PRIMARY KEY (id_papel)
+			PRIMARY KEY (id_papel),			
+
+			CONSTRAINT CK_tabela_papeis$cd_papel
+			CHECK (cd_papel LIKE '[A-Z]')
 		) ON dados
+
+	-- Papeis
+	INSERT INTO cad.tabela_papeis (cd_papel, nm_papel, dv_ativo, dt_inclusao)
+	VALUES
+		('C', 'Cliente', 1, GETDATE()),
+		('F', 'Fornecedor', 1, GETDATE()),
+		('U', 'Usuário do sistema', 1, GETDATE()),
+		('A', 'Administrador', 1, GETDATE()),
+		('E', 'Funcionário', 1, GETDATE())
 END

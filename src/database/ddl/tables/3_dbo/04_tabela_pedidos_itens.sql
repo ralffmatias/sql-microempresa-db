@@ -8,20 +8,22 @@ IF object_id(N'dbo.tabela_pedidos_itens', N'U') is null
 BEGIN
 	CREATE TABLE dbo.tabela_pedidos_itens
 		(
-			id_pedidos_item		int identity(1,1),
-			id_pedido			int not null,
-			dt_entrega			smalldatetime not null,
-			id_medida			int not null,
-			id_recheio			tinyint,
-			id_massa			tinyint not null,
-			dv_topper			bit default 0,
-			vl_topper			numeric(19, 2) default 0.00,
-			nm_tema				varchar(50),
-			nm_evento			varchar(50),
-			dv_entrega			bit default 0,
-			vl_entrega			numeric(19, 2)  default 0.00,
-			vl_desconto			numeric(19, 2)  default 0.00,
-			id_status			int not null,
+			id_pedidos_item			int identity(1,1),
+			id_pedido				int not null,
+			dt_entrega				smalldatetime not null,
+			id_medida				tinyint not null,
+			id_recheio				tinyint,
+			id_massa				tinyint not null,
+			nm_tema					varchar(50),
+			nm_evento				varchar(50),
+			dv_entrega				bit not null default 0,
+			vl_entrega				numeric(19, 2) not null default 0.00,
+			vl_desconto				numeric(19, 2) not null default 0.00,
+			id_status				smallint not null,
+			dt_inclusao				datetime not null  default getdate(),
+			id_usuario_inclusao		int,
+			dt_alteracao			datetime,
+			id_usuario_alteracao	int,
 
 			CONSTRAINT pk_tabela_pedidos_itens$id_pedidos_item 
 			PRIMARY KEY (id_pedidos_item),
@@ -30,16 +32,22 @@ BEGIN
 			FOREIGN KEY (id_pedido)	REFERENCES dbo.tabela_pedidos(id_pedido),
 
 			CONSTRAINT fk_tabela_pedidos_itens_X_tabela_medidas$_id_medida		
-			FOREIGN KEY (id_medida)	REFERENCES dbo.tabela_medidas(id_medida),
+			FOREIGN KEY (id_medida)	REFERENCES prod.tabela_medidas(id_medida),
 
 			CONSTRAINT fk_tabela_pedidos_itens_X_tabela_recheios$_id_recheio		
-			FOREIGN KEY (id_recheio) REFERENCES dbo.tabela_recheios(id_recheio),
+			FOREIGN KEY (id_recheio) REFERENCES prod.tabela_recheios(id_recheio),
 
 			CONSTRAINT fk_tabela_pedidos_itens_X_tabela_massas$_id_massa		
-			FOREIGN KEY (id_massa) REFERENCES dbo.tabela_massas(id_massa),
+			FOREIGN KEY (id_massa) REFERENCES prod.tabela_massas(id_massa),
 
-			CONSTRAINT		fk_tabela_pedidos_itens_X_tabela_status$id_status 
-			FOREIGN KEY		(id_status) REFERENCES dbo.tabela_status(id_status)
+			CONSTRAINT fk_tabela_pedidos_itens_X_tabela_status$id_status 
+			FOREIGN KEY (id_status) REFERENCES dbo.tabela_status(id_status),
+
+			CONSTRAINT CK_tabela_pedidos_itens$vl_entrega 
+			CHECK (vl_entrega >= 0),
+
+			CONSTRAINT CK_tabela_pedidos_itens$vl_desconto 
+			CHECK (vl_desconto >= 0)
 		) ON dados
 
 	IF NOT EXISTS (SELECT TOP 1 1 FROM sys.indexes WHERE name = 'Indx_tabela_pedidos_itens$id_pedido')

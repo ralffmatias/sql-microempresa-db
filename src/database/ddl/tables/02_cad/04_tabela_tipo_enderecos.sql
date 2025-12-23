@@ -24,4 +24,12 @@ BEGIN
 			CONSTRAINT CK_tabela_tipo_enderecos$cd_tipo_endereco
 			CHECK (cd_tipo_endereco LIKE '[A-Z][A-Z][A-Z]')
 		) ON dados
+
+	-- Tipos de endereço
+	INSERT INTO cad.tabela_tipo_enderecos (cd_tipo_endereco, nm_tipo_endereco, dv_ativo, dt_inclusao)
+	VALUES
+		('RES', 'Residencial', 1, GETDATE()),
+		('COM', 'Comercial', 1, GETDATE()),
+		('ENT', 'Entrega', 1, GETDATE()),
+		('COB', 'Cobrança', 1, GETDATE())
 END
