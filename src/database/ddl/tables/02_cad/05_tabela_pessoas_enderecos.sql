@@ -10,6 +10,8 @@ BEGIN
 		(
 			id_pessoas_endereco		int identity(1,1),
 			id_pessoa				int not null,
+			nm_descricao			varchar(200),
+			nm_observacao			varchar(200),
 			id_tipo_endereco		smallint not null,
 			dv_ativo				bit not null default 1,
 			dv_principal			bit not null,

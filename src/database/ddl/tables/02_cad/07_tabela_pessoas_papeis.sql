@@ -8,7 +8,7 @@ IF object_id(N'cad.tabela_pessoas_papeis', N'U') is null
 BEGIN
 	CREATE TABLE cad.tabela_pessoas_papeis
 		(
-			id_pessoa_papel	smallint identity(1,1),
+			id_pessoa_papel	int identity(1,1),
 			id_pessoa		int not null,
 			id_papel		smallint not null,
 			dv_ativo		bit not null default 1,
