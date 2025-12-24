@@ -11,8 +11,6 @@ GO
    - Inserção dos dados iniciais do sistema LadyCake
    - Contém produtos reais utilizados pela empresa
      (medidas, massas, recheios e adicionais)
-   - Dados da tabela_pessoas são fictícios e utilizados
-     exclusivamente para testes e desenvolvimento local
 
  Observações:
    - Script destinado a ambiente de estudo e portfólio

@@ -123,7 +123,7 @@ BEGIN TRY
 			THROW 50001, 'Falha ao gerar o identificador de pessoa.', 1;
 		END
 
-		EXEC cad.inserir_pessoas_papeis
+		EXEC cad.p_inserir_pessoas_papeis
 			@id_pessoa	= @id_pessoa,
 			@cd_papel	= @cd_papel,
 			@cd_retorno	= @cd_retorno OUTPUT,

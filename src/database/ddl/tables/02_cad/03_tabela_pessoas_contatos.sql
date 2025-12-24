@@ -14,8 +14,8 @@ BEGIN
 			id_tipo_contato			smallint not null,
 			dv_ativo				bit not null default 1,
 			dv_principal			bit not null,
-			nm_ddd					char(2),
-			nm_celular				char(9),
+			nr_ddd					char(2),
+			nr_telefone_celular		char(9),
 			nm_email				varchar(150),
 			dt_inclusao				datetime not null default getdate(),
 			dt_alteracao			datetime,
@@ -29,12 +29,28 @@ BEGIN
 			CONSTRAINT fk_tabela_pessoas_contatos_X_tabela_tipo_contatos$id_tipo_contato
 			FOREIGN KEY (id_tipo_contato) REFERENCES cad.tabela_tipo_contatos(id_tipo_contato),
 
-			CONSTRAINT CK_tabela_pessoas_contatos$nm_email_X_nm_ddd_X_nm_celular
-			CHECK	(
-						(nm_email IS NOT NULL AND LEN(LTRIM(RTRIM(nm_email))) > 0)
-						OR (nm_ddd IS NOT NULL AND nm_celular IS NOT NULL
-						AND nm_ddd LIKE '[1-9][0-9]'
-						AND nm_celular LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]')
+			CONSTRAINT CK_tabela_pessoas_contatos$nm_email_X_nr_ddd_X_nr_telefone_celular
+			CHECK
+					(
+						(
+							-- Caso EMAIL
+							nm_email IS NOT NULL
+							AND nm_email LIKE '%_@_%._%'
+							AND nr_ddd IS NULL
+							AND nr_telefone_celular IS NULL
+						)
+						OR
+						(
+							-- Caso TELEFONE
+							nm_email IS NULL
+							AND nr_ddd IS NOT NULL
+							AND nr_telefone_celular IS NOT NULL
+							AND nr_ddd LIKE '[1-9][0-9]'
+							AND		(
+										nr_telefone_celular LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'
+										OR nr_telefone_celular LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'
+									)
+						)
 					)
 		) ON dados
 
@@ -56,6 +72,22 @@ BEGIN
 	END ELSE
 	BEGIN
 		PRINT 'Já existe um indice com o nome: UX_tabela_pessoas_contatos$id_pessoa_X_nm_email'
+	END
+
+	IF NOT EXISTS (SELECT TOP 1 1 FROM sys.indexes WHERE name = 'UX_tabela_pessoas_contatos$id_pessoa_X_ddd_X_celular')
+	BEGIN
+		CREATE UNIQUE INDEX UX_tabela_pessoas_contatos$id_pessoa_X_nr_ddd_X_nr_telefone_celular
+		ON cad.tabela_pessoas_contatos
+			(
+				id_pessoa,
+				nr_ddd,
+				nr_telefone_celular
+			)
+		WHERE	nr_ddd IS NOT NULL
+		AND		nr_telefone_celular IS NOT NULL
+	END ELSE
+	BEGIN
+		PRINT 'Já existe um indice com o nome: UX_tabela_pessoas_contatos$id_pessoa_X_ddd_X_celular'
 	END
 
 	IF NOT EXISTS (SELECT TOP 1 1 FROM sys.indexes WHERE name = 'Idx_tabela_pessoas_contatos$id_pessoa')
